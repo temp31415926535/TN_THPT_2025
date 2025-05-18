@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Đếm ngược đến 25/6/2025</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Arial', sans-serif;
+		}
+
+		body {
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: linear-gradient(45deg, #00a8ff, #00ffad);
+		}
+
+		.container {
+			background: rgba(255, 255, 255, 0.95);
+			padding: 2rem;
+			border-radius: 15px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+			text-align: center;
+		}
+
+		h1 {
+			color: #333;
+			margin-bottom: 1.5rem;
+			font-size: 2.5rem;
+		}
+
+		.countdown {
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			flex-wrap: wrap;
+		}
+
+		.box {
+			background: #f0f0f0;
+			padding: 1.5rem;
+			border-radius: 10px;
+			min-width: 120px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.number {
+			font-size: 2.5rem;
+			font-weight: bold;
+			color: #222;
+			margin-bottom: 0.5rem;
+		}
+
+		.text {
+			color: #666;
+			font-size: 1.1rem;
+			text-transform: uppercase;
+		}
+
+@media (max-width: 480px) {
+			.container {
+				margin: 1rem;
+				padding: 1rem;
+			}
+
+			.box {
+				min-width: 80px;
+				padding: 1rem;
+			}
+
+			.number {
+				font-size: 1.8rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Đếm ngược đến 8:00 25/6/2025</h1>
+		<div class="countdown">
+			<div class="box">
+				<div class="number" id="days">
+					00
+				</div>
+				<div class="text">
+					Ngày
+				</div>
+			</div>
+			<div class="box">
+				<div class="number" id="hours">
+					00
+				</div>
+				<div class="text">
+					Giờ
+				</div>
+			</div>
+			<div class="box">
+				<div class="number" id="minutes">
+					00
+				</div>
+				<div class="text">
+					Phút
+				</div>
+			</div>
+			<div class="box">
+				<div class="number" id="seconds">
+					00
+				</div>
+				<div class="text">
+					Giây
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Thiết lập ngày đích (25 tháng 6 năm 2025 8:00 sáng)
+		const targetDate = new Date(2025, 5, 25, 8, 0, 0);
+
+		function updateCountdown() {
+			const currentDate = new Date();
+			const difference = targetDate - currentDate;
+
+			if (difference <= 0) {
+				document.getElementById('days').textContent = '00';
+				document.getElementById('hours').textContent = '00';
+				document.getElementById('minutes').textContent = '00';
+				document.getElementById('seconds').textContent = '00';
+				return;
+			}
+
+			const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+			const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+			// Hiển thị số có 2 chữ số
+			const formatNumber = num => num.toString().padStart(2, '0');
+
+			document.getElementById('days').textContent = formatNumber(days);
+			document.getElementById('hours').textContent = formatNumber(hours);
+			document.getElementById('minutes').textContent = formatNumber(minutes);
+			document.getElementById('seconds').textContent = formatNumber(seconds);
+		}
+
+		// Cập nhật mỗi giây
+		setInterval(updateCountdown, 1000);
+		// Chạy lần đầu ngay lập tức
+		updateCountdown();
+	</script>
+</body>
+</html>
